@@ -38,7 +38,7 @@
 }
 
 .tabs:not(:last-child), .pagination:not(:last-child), .message:not(:last-child), .level:not(:last-child), .breadcrumb:not(:last-child), .highlight:not(:last-child), .block:not(:last-child), .title:not(:last-child),
-.subtitle:not(:last-child), .table-container:not(:last-child), .table:not(:last-child), .progress:not(:last-child), .notification:not(:last-child), .content:not(:last-child), .box:not(:last-child) {
+.subtitle:not(:last-child), .table-container:not(:last-child), .table:not(:last-child), .progress:not(:last-child), .notification:not(:last-child), .content:not(:last-child), .box:not(:last-child), .project-box:not(:last-child) {
   margin-bottom: 1.5rem;
 }
 
@@ -417,7 +417,7 @@ table th {
 }
 
 /* Bulma Elements */
-.box {
+.box, .project-box {
   background-color: white;
   border-radius: 6px;
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
@@ -426,10 +426,10 @@ table th {
   padding: 1.25rem;
 }
 
-a.box:hover, a.box:focus {
+a.box:hover, a.project-box:hover, a.box:focus, a.project-box:focus {
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px #3273dc;
 }
-a.box:active {
+a.box:active, a.project-box:active {
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.2), 0 0 0 1px #3273dc;
 }
 
@@ -8174,7 +8174,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   margin: 0 !important;
 }
 
-.mt-0 {
+.mt-0, .project-box {
   margin-top: 0 !important;
 }
 
@@ -8272,7 +8272,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   margin-right: 0.75rem !important;
 }
 
-.mb-3 {
+.mb-3, .project-box {
   margin-bottom: 0.75rem !important;
 }
 
@@ -8280,7 +8280,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   margin-left: 0.75rem !important;
 }
 
-.mx-3 {
+.mx-3, .project-box {
   margin-left: 0.75rem !important;
   margin-right: 0.75rem !important;
 }
@@ -10132,6 +10132,10 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   color: #24292e;
+}
+
+img.image.rounded {
+  border-radius: 0.5em;
 }
 
 /*# sourceMappingURL=style.css.map */
