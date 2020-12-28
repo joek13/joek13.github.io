@@ -1,0 +1,16 @@
+{
+  "name": "joek13.github.io",
+  "version": "1.0.0",
+  "description": "Personal website for Joe Kerrigan.",
+  "repository": "https://github.com/joek13/joek13.github.io",
+  "author": "Joe Kerrigan <joek1301@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bulma": "^0.9.1",
+    "sass": "^1.30.0"
+  },
+  "scripts": {
+    "build": "sass scss:css",
+		"server": "python -m http.server 8000"
+  }
+}
