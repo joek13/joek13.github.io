@@ -1,0 +1,26 @@
+---
+layout: default
+---
+
+<header>
+    <section class="section pb-0">
+        <h1 class="title">Joe Kerrigan's blog</h1>
+    </section>
+</header>
+<main>
+    <section class="section">
+        <div class="container is-max-desktop">
+            <ul>
+                {% for post in site.posts %}
+                <li>
+                    <div class="block mb-4">
+                        <p class="is-size-4"><a href="{{ post.url }}">{{ post.title }}</a></p>
+                        <p>{{ post.description }}</p>
+                        <p class="is-italic">{{ post.date | date: "%B, %d, %Y" }}</p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+</main>
