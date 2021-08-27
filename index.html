@@ -1,158 +1,207 @@
+---
+---
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>joe kerrigan</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Joe Kerrigan</title>
     <meta name="description" content="Joe Kerrigan's personal website.">
+    <meta name="author" content="Joe Kerrigan">
     <meta name="robots" content="index, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:title" content="Joe Kerrigan">
     <meta property="og:description" content="Joe Kerrigan's personal website.">
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/index.css" />
 </head>
 
 <body>
-    <section class="section is-small" id="introduction" aria-label="Main page body">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-one-quarter">
-                    <img src="/img/joe.jpg" class="image rounded" alt="a picture of Joe smiling with his family."
-                        aria-label="portrait">
-                </div>
-                <div class="column">
-                    <h1 class="title is-3">
-                        Hi, I'm Joe Kerrigan.
-                    </h1>
-                    <h2 class="subtitle is-4">
-                        I'm a student developer & Jefferson Scholar at the University of Virginia.
-                    </h2>
-                    <div class="block">
-                        <p>
-                            Some of my current interests are web development, systems programming, computer vision,
-                            machine learning, open-source software, and ethics in tech. Outside of software, I'm a jazz
-                            bassist and
-                            cross country runner.
+    <main>
+
+        <section class="section my-0" id="introduction" aria-label="Introduciton">
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-one-quarter">
+                        <img src="/img/joe.jpg" class="image rounded" alt="a picture of Joe smiling with his family."
+                            aria-label="portrait">
+                    </div>
+                    <div class="column">
+                        <nav class="level mb-1">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <h1 class="title is-3">
+                                        Joe Kerrigan
+                                    </h1>
+                                </div>
+                                <div class="level-item is-hidden-mobile">
+                                </div>
+                                <div class="level-item">
+                                    <p class="subtitle"><a href="/web_resume.pdf" target="_blank"
+                                            aria-label="resume link">resume</a></p>
+                                </div>
+                                <!-- commented out until blog is active -->
+                                <!-- <div class="level-item">
+                                    <p class="subtitle"><a href="/web_resume.pdf" target="_blank"
+                                            aria-label="resume link">blog</a></p>
+                                </div> -->
+                            </div>
+                        </nav>
+                        <p class="subtitle is-4">
+                            I'm a student developer & Jefferson Scholar at the University of Virginia.
                         </p>
-                    </div>
-                    <div class="block">
-                        <p>
-                            Here, you'll find some of my favorite projects I've worked on. All of them are open
-                            source,
-                            so feel free to take a look at how they work!
-                        </p>
-                    </div>
-                    <div class="block">
-                        <p>Feel free to <a href="/web_resume.pdf" aria-label="resume PDF link">view my resume.</a></p>
-                    </div>
-                    <div class="block">
-                        <p class="has-text-weight-semibold">Get in touch:</p>
-                        <p>Email: <a href="mailto:joek1301@gmail.com"
-                                aria-label="personal email mailto link">joek1301@gmail.com</a> <em>(personal)</em></p>
-                        <p>Email: <a href="mailto:jek4qv@virginia.edu"
-                                aria-label="school email mailto link">jek4qv@virginia.edu</a> <em>(school)</em></p>
-                        <p>GitHub: <a href="https://github.com/joek13/" aria-label="GitHub link">@joek13</a></p>
-                        <p>LinkedIn: <a href="https://www.linkedin.com/in/joseph-e-kerrigan/"
-                                aria-label="LinkedIn link">https://www.linkedin.com/in/joseph-e-kerrigan/</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <hr />
-        </div>
-        <div class="container">
-            <div class="columns">
-                <div class="column" aria-label="Column containing my favorite projects.">
-                    <h1 class="title is-4 mb-3">favorite projects</h1>
-                    <div class="box project-box">
-                        <h2 class="subtitle has-text-weight-semibold mb-1"><a href="https://bdwa.herokuapp.com/">Blind
-                                Date with
-                                an Album</a>
-                        </h2>
-                        <p>A crowdsourced music discovery platform that publishes mysterious, user-submitted album
-                            descriptions.
-                            Created as part of <a href="https://2020f.pennapps.com/">PennApps XXI</a>.
-                        </p>
-                        <p><a href="http://github.com/joek13/bdwa" aria-label="source code link">View the source
-                                code</a></p>
-                        <p><strong>Technologies:</strong> Python, Django, PostgreSQL, Heroku</p>
-                    </div>
-                    <div class="box project-box">
-                        <h2 class="subtitle has-text-weight-semibold mb-1"><a href="https://wxtj.herokuapp.com">WXTJ
-                                Playlist
-                                Converter</a></h2>
-                        <p>At the University of Virginia's volunteer-run radio station WXTJ, DJs often spend time
-                            organizing their
-                            show playlists on music streaming services like Spotify. This tool automatically converts
-                            spotify playlists to the <span class="is-family-monospace">.csv</span> format used by the
-                            station's
-                            web
-                            interface.</p>
-                        <p><a href="https://github.com/joek13/wxtj-converter" aria-label="source code link">View the
-                                source code</a></p>
-                        <p><strong>Technologies:</strong> Python, Django, Heroku, Spotify API</p>
-                    </div>
-                    <div class="box project-box">
-                        <h2 class="subtitle has-text-weight-semibold mb-1"><a
-                                href="https://github.com/joek13/py-music-bot">Discord Music Bot</a>
-                        </h2>
-                        <p>A simple, minimalistic Discord music bot that plays songs from YouTube and other sources.</p>
-                        <p><a href="https://github.com/joek13/py-music-bot" aria-label="source code link">View the
-                                source code</a></p>
-                        <p><strong>Technologies:</strong> Python, Discord.py, ffmpeg, youtube-dl</p>
-                    </div>
-                    <div class="box project-box">
-                        <h2 class="subtitle has-text-weight-semibold mb-1"><a
-                                href="https://github.com/joek13/pystv">pystv:
-                                Ranked-Choice Voting</a>
-                        </h2>
-                        <p>A simple Python implementation of the Single Transferable Vote ranked-choice vote counting
-                            system,
-                            used in
-                            Club Running's Fall 2020 elections.</p>
-                        <p><a href="https://github.com/joek13/pystv" aria-label="source code link">View the source
-                                code</a></p>
-                        <p><strong>Technologies:</strong> Python, Google Forms</p>
-                    </div>
-                    <div class="box project-box">
-                        <h2 class="subtitle has-text-weight-semibold mb-1"><a
-                                href="https://joek13.github.io/fourier-toy/">Fourier Toy</a>
-                        </h2>
-                        <p>A toy application that draws shapes using their Fourier transform.</p>
-                        <p><a href="http://github.com/joek13/fourier-toy" aria-label="source code link">View the source
-                                code</a></p>
-                        <p><strong>Technologies:</strong> JavaScript, Node.js, jsfft</p>
-                    </div>
-                </div>
-                <div class="column" aria-label="Column of what I'm working on now">
-                    <h1 class="title is-4 mb-3">what i'm working on now</h1>
-                    <div class="box project-box">
-                        <h2 class="subtitle has-text-weight-semibold mb-1"><a
-                                href="https://theCourseForum.com/">theCourseForum</a>
-                        </h2>
-                        <p>I'm a full-stack software engineer at theCourseForum, a University of Virginia course review
-                            aggregator and academic
-                            planner with 41,000 users.
-                        </p>
-                        <p><a href="http://github.com/theCourseForum/theCourseForum2" aria-label="source code link">View
-                                the source code</a></p>
-                        <p><strong>Technologies:</strong> Docker, Python, Django, PostgreSQL, Bootstrap, jQuery</p>
-                    </div>
-                    <div class="box project-box">
-                        <h2 class="subtitle has-text-weight-semibold mb-1"><a
-                                href="http://virginia.clubrunning.org/">UVA Club Running</a>
-                        </h2>
-                        <p>I'm the webmaster of UVA Club Running, an athletic CIO with over 100 active members. I spend
-                            time streamlining deployment, engineering web applications, and keeping the site
-                            up-to-date.</p>
-                        <p><a href="http://github.com/joek13/club-running-site" aria-label="source code link">View the
-                                source code</a></p>
-                        <p><strong>Technologies:</strong> Python, Flask, React, GitHub Actions</p>
+                        <div class="block">
+                            <p>
+                                Some of my current interests are full-stack web development, cloud computing, systems
+                                programming, and artificial intelligence. As an engaged computer science student and
+                                programmer, I'm captivated by the elegant solutions to the problems all around us.
+                            </p>
+                        </div>
+                        <div class="block">
+                            <p>
+                                My past experience includes working as a <a
+                                    href="https://www.codingitforward.com/civic-digital-fellowship">Civic Digital
+                                    Fellow</a>
+                                at United States Special Operations Command, building full-stack web applications that
+                                integrate with custom machine learning models.
+                                Additionally, I've worked two summer internships with Charlotte-based <a
+                                    href="https://www.leadtools.com/">LEAD Technologies</a>, building iPhone and Android
+                                applications that leverage LEADTOOLS image- and document-processing capabilities.
+                            </p>
+                        </div>
+                        <div class="block">
+                            <p>
+                                Outside of software, I'm a cross-country runner and a jazz bassist in UVa's music
+                                program.
+                            </p>
+                        </div>
+                        <div class="block">
+                            <p class="has-text-weight-semibold">Contact me</p>
+                            <p>Email: <a href="mailto:joek1301@gmail.com"
+                                    aria-label="personal email mailto link">joek1301@gmail.com</a> <em>(personal)</em>
+                            </p>
+                            <p>Email: <a href="mailto:jek4qv@virginia.edu"
+                                    aria-label="school email mailto link">jek4qv@virginia.edu</a> <em>(school)</em></p>
+                            <p>GitHub: <a href="https://github.com/joek13/" aria-label="GitHub link">@joek13</a></p>
+                            <p>LinkedIn: <a href="https://www.linkedin.com/in/joseph-e-kerrigan/"
+                                    aria-label="LinkedIn link">https://www.linkedin.com/in/joseph-e-kerrigan/</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+        <!-- no vertical padding to reduce spacing between sections -->
+        <section class="section py-0" id="projects" aria-label="project descriptions">
+            <div class="container">
+                <div class="columns">
+                    <div class="column" aria-label="Column containing my favorite projects.">
+                        <h1 class="title is-4 mb-3">favorite projects</h1>
+                        <div class="box project-box">
+                            <h2 class="subtitle has-text-weight-semibold mb-1"><a
+                                    href="https://bdwa.herokuapp.com/">Blind
+                                    Date with
+                                    an Album</a>
+                            </h2>
+                            <p>A crowdsourced music discovery platform that publishes mysterious, user-submitted album
+                                descriptions.
+                                Created as part of <a href="https://2020f.pennapps.com/">PennApps XXI</a>.
+                            </p>
+                            <p><a href="http://github.com/joek13/bdwa" aria-label="source code link">View the source
+                                    code</a></p>
+                            <p><strong>Technologies:</strong> Python, Django, PostgreSQL, Heroku</p>
+                        </div>
+                        <div class="box project-box">
+                            <h2 class="subtitle has-text-weight-semibold mb-1"><a href="https://wxtj.herokuapp.com">WXTJ
+                                    Playlist
+                                    Converter</a></h2>
+                            <p>At the University of Virginia's volunteer-run radio station WXTJ, DJs often spend time
+                                organizing their
+                                show playlists on music streaming services like Spotify. This tool automatically
+                                converts
+                                spotify playlists to the <span class="is-family-monospace">.csv</span> format used by
+                                the
+                                station's
+                                web
+                                interface.</p>
+                            <p><a href="https://github.com/joek13/wxtj-converter" aria-label="source code link">View the
+                                    source code</a></p>
+                            <p><strong>Technologies:</strong> Python, Django, Heroku, Spotify API</p>
+                        </div>
+                        <div class="box project-box">
+                            <h2 class="subtitle has-text-weight-semibold mb-1"><a
+                                    href="https://github.com/joek13/py-music-bot">Discord Music Bot</a>
+                            </h2>
+                            <p>A simple, minimalistic Discord music bot that plays songs from YouTube and other sources.
+                            </p>
+                            <p><a href="https://github.com/joek13/py-music-bot" aria-label="source code link">View the
+                                    source code</a></p>
+                            <p><strong>Technologies:</strong> Python, Discord.py, ffmpeg, youtube-dl</p>
+                        </div>
+                        <div class="box project-box">
+                            <h2 class="subtitle has-text-weight-semibold mb-1"><a
+                                    href="https://github.com/joek13/pystv">pystv:
+                                    Ranked-Choice Voting</a>
+                            </h2>
+                            <p>A simple Python implementation of the Single Transferable Vote ranked-choice vote
+                                counting
+                                system,
+                                used in
+                                Club Running's Fall 2020 elections.</p>
+                            <p><a href="https://github.com/joek13/pystv" aria-label="source code link">View the source
+                                    code</a></p>
+                            <p><strong>Technologies:</strong> Python, Google Forms</p>
+                        </div>
+                        <div class="box project-box">
+                            <h2 class="subtitle has-text-weight-semibold mb-1"><a
+                                    href="https://joek13.github.io/fourier-toy/">Fourier Toy</a>
+                            </h2>
+                            <p>A toy application that draws shapes using their Fourier transform.</p>
+                            <p><a href="http://github.com/joek13/fourier-toy" aria-label="source code link">View the
+                                    source
+                                    code</a></p>
+                            <p><strong>Technologies:</strong> JavaScript, Node.js, jsfft</p>
+                        </div>
+                    </div>
+                    <div class="column" aria-label="Column of what I'm working on now">
+                        <h1 class="title is-4 mb-3">what i'm working on now</h1>
+                        <div class="box project-box">
+                            <h2 class="subtitle has-text-weight-semibold mb-1"><a
+                                    href="https://theCourseForum.com/">theCourseForum</a>
+                            </h2>
+                            <p>I'm a full-stack software engineer at theCourseForum, a University of Virginia course
+                                review
+                                aggregator and academic
+                                planner with 41,000 users.
+                            </p>
+                            <p><a href="http://github.com/theCourseForum/theCourseForum2"
+                                    aria-label="source code link">View
+                                    the source code</a></p>
+                            <p><strong>Technologies:</strong> Docker, Python, Django, PostgreSQL, Bootstrap, jQuery</p>
+                        </div>
+                        <div class="box project-box">
+                            <h2 class="subtitle has-text-weight-semibold mb-1"><a
+                                    href="http://virginia.clubrunning.org/">UVA Club Running</a>
+                            </h2>
+                            <p>I'm the webmaster of UVA Club Running, an athletic CIO with over 100 active members. I
+                                spend
+                                time streamlining deployment, engineering web applications, and keeping the site
+                                up-to-date.</p>
+                            <p><a href="http://github.com/joek13/club-running-site" aria-label="source code link">View
+                                    the
+                                    source code</a></p>
+                            <p><strong>Technologies:</strong> Python, Flask, React, GitHub Actions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <hr />
+    <footer>
+        {% include horoscope.html %}
+    </footer>
 </body>
 
 </html>

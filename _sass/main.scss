@@ -5,3 +5,7 @@ $family-sans-serif: "Inter", sans-serif;
 $body-font-size: 1.0em;
 
 @import "bulma/bulma";
+
+.horoscope {
+    max-width: 600px;
+}
