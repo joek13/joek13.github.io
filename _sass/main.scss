@@ -2,6 +2,16 @@
 
 $family-sans-serif: "Inter", sans-serif;
 
+// color overrides
+$turquoise: #4ECDC4;
+$red: #FF6B6B;
+$dark: #292f36;
+$grey-darker: #292f36;
+$purple: #8a4fff;
+$lavender: #c3bef7;
+
+$primary: $purple;
+
 $body-font-size: 1.0em;
 
 @import "bulma/bulma";
