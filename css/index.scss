@@ -1,16 +1,4 @@
 ---
 ---
 
-@import "main.scss";
-
-
-img.image.rounded {
-    border-radius: 0.5em;
-}
-
-.project-box {
-    @extend .box;
-    @extend .mx-2;
-    @extend .mt-0;
-    @extend .mb-2;
-}
+@import "base.scss";
