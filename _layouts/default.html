@@ -1,5 +1,6 @@
 ---
 ---
+<!-- default page layout with header and basic seo tags -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +18,10 @@
 </head>
 
 <body>
-    {{ content }}
+    {% include header.html %}
+    <main>
+        {{ content }}
+    </main>
 </body>
 
 </html>

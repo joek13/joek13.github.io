@@ -1,276 +1,42 @@
 ---
+layout: default
+title: Joe Kerrigan
+description: Joe Kerrigan is a student developer and Jefferson Scholar at the University of Virginia.
 ---
 
-<!DOCTYPE html>
-<html lang="en">
+<section id="about">
+    <h1>About me</h1>
+    <img src="/img/radcam.webp" class="profile" width="300" height="300" alt="A picture of Joe sitting." />
+    <p class="subtitle">I'm a student developer and Jefferson Scholar at the University of Virginia.</p>
+    <p>
+        I study Computer Science and Mathematics in the College of Arts & Sciences. Some of my current interests are
+        full-stack web development, cloud infrastructure, and functional programming. I am a passionate student of
+        theory, but I am also a builder; as such, I am captivated most by elegant solutions to problems of practical
+        importance. I am driven to leverage the incredible power of modern computing towards socially responsible
+        ends.
+    </p>
+    <h2>Experience</h2>
+    <p>
+        My past experience includes working as a <a
+            href="https://www.codingitforward.com/civic-digital-fellowship">Civic Digital Fellow</a> at United
+        States Special Operations Command, where I built a deep learning based image inference pipeline, designed
+        full-stack web applications, and managed cloud deployments on Kubernetes.
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Joe Kerrigan</title>
-    <link rel="canonical" href="https://www.kerrigan.dev" />
-    <meta name="description"
-        content="Joe Kerrigan is a student developer and Jefferson Scholar at the University of Virginia.">
-    <meta name="author" content="Joe Kerrigan">
-    <meta name="robots" content="index, follow">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:title" content="Joe Kerrigan">
-    <meta property="og:image" content="/img/joe.jpg">
-    <meta property="og:description"
-        content="Joe Kerrigan is a student developer and Jefferson Scholar at the University of Virginia.">
-    <link rel="stylesheet" href="/css/index.css" />
-</head>
-
-<body>
-    <main>
-        <section class="section pb-0" id="introduction" aria-label="introduction">
-            <div class="container">
-                <div class="columns">
-                    <div class="column is-one-quarter">
-                        <img src="/img/joe.jpg" class="image rounded" alt="a picture of Joe smiling with his family."
-                            aria-label="portrait">
-                    </div>
-                    <div class="column">
-                        <nav class="level mb-1">
-                            <div class="level-left">
-                                <div class="level-item">
-                                    <h1 class="title is-3">
-                                        Joe Kerrigan
-                                    </h1>
-                                </div>
-                                <div class="level-item">
-                                    <p class="subtitle is-5">(he/him/his)</p>
-                                </div>
-                                <div class="level-item">
-                                    <p class="subtitle"><a href="/web_resume.pdf" target="_blank">resume</a></p>
-                                </div>
-                                <!-- commented out until blog is active -->
-                                <!-- <div class="level-item">
-                                    <p class="subtitle"><a href="/web_resume.pdf" target="_blank"
-                                            aria-label="resume link">blog</a></p>
-                                </div> -->
-                            </div>
-                        </nav>
-                        <p class="subtitle is-4">
-                            I'm a student developer & Jefferson Scholar at the University of Virginia.
-                        </p>
-                        <div class="block">
-                            <p>
-                                I study Computer Science and Mathematics in the College of Arts & Sciences.
-                                Some of my current interests are full-stack web development, cloud infrastructure,
-                                and functional programming. As an engaged student and programmer, I'm captivated by
-                                the elegant solutions to the problems all around us. Furthermore, I am driven to
-                                leverage the incredible power of modern computing towards socially responsible ends.
-                            </p>
-                        </div>
-                        <div class="block">
-                            <p>
-                                My past experience includes working as a <a
-                                    href="https://www.codingitforward.com/civic-digital-fellowship">Civic Digital
-                                    Fellow</a>
-                                at United States Special Operations Command, where I built a deep-learning based image
-                                inference pipeline, designed full-stack web applications, and managed cloud deployments
-                                on Kubernetes. I've also worked two summer internships with Charlotte-based
-                                <a href="https://www.leadtools.com/">LEAD Technologies</a>, developing iPhone and
-                                Android applications that leverage LEADTOOLS image- and document-processing
-                                capabilities.
-                            </p>
-                        </div>
-                        <div class="block">
-                            <p>
-                                I'm a cross-country runner with <a href="http://virginia.clubrunning.org/">UVA Club
-                                    Running</a>
-                                and a jazz bassist in UVA's music program. I'm also a music
-                                nerd and unreformed vinyl junkie. I listen to all kinds of music, but my Spotify Wrapped
-                                suggests I have a particular penchant for indie rock, bebop, baroque, and hyperpop.
-                                Trust me, I find this news as disturbing as you do.
-                            </p>
-                        </div>
-                        <div class="block">
-                            <p class="has-text-weight-semibold">Contact me</p>
-                            <p>Email: <a href="mailto:joek1301@gmail.com"
-                                    aria-label="personal email mailto link">joek1301@gmail.com</a> <em>(personal)</em>
-                            </p>
-                            <p>Email: <a href="mailto:jek4qv@virginia.edu"
-                                    aria-label="school email mailto link">jek4qv@virginia.edu</a> <em>(school)</em></p>
-                            <p>GitHub: <a href="https://github.com/joek13/" aria-label="GitHub link">@joek13</a></p>
-                            <p>LinkedIn: <a href="https://www.linkedin.com/in/joseph-e-kerrigan/"
-                                    aria-label="LinkedIn link">https://www.linkedin.com/in/joseph-e-kerrigan/</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- no vertical padding to reduce spacing between sections -->
-        <section class="section" id="roles" aria-label="roles">
-            <div class="container">
-                <h1 class="title">Roles</h1>
-                <p class="subtitle">Some of the different hats I wear, and what I can do with them.</p>
-                <div class="tile is-ancestor">
-                    <div class="tile is-4 is-parent">
-                        <div class="tile is-child notification is-primary">
-                            <h2 class="title is-4">Full-stack engineer</h2>
-                            <div class="content">
-                                <p>As a full-stack engineer, I can contribute to every layer of web application
-                                    development.</p>
-                                <p>I can build <strong>responsive, accessible</strong> interfaces on the
-                                    <strong>frontend</strong> using frameworks like <strong>React</strong>.
-                                </p>
-                                <p>The applications are backed by <strong>backend APIs</strong> that integrate with
-                                    other services. I have experience working on backends written in
-                                    <strong>Django</strong>, <strong>Flask,</strong> and <strong>FastAPI.</strong>
-                                </p>
-                                <p>The applications are <strong>containerized</strong> and deployable to cloud providers
-                                    like <strong>AWS</strong>, <strong>GCP</strong>, or <strong>Heroku</strong>, so they
-                                    run on anything with a web browser.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tile is-4 is-parent">
-                        <div class="tile is-child notification is-danger">
-                            <h2 class="title is-4">Data science</h2>
-                            <div class="content">
-                                <p>My background in data science involves both academic study and practical experience.
-                                </p>
-                                <p>I have experience architecting, training, and deploying <strong>machine
-                                        learning</strong> models to perform a variety of inference tasks using
-                                    frameworks like <strong>PyTorch</strong>.</p>
-                                <p>These models include <strong>deep neural networks</strong> to assist in
-                                    <strong>computer vision</strong> and <strong>natural language processing</strong>
-                                    tasks using a variety of model architectures.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tile is-4 is-parent">
-                        <div class="tile is-child notification is-success">
-                            <h2 class="title is-4">DevOps</h2>
-                            <div class="content">
-                                <p>As a developer myself, I'm passionate about improving developer experience to
-                                    maximize efficiency and engineers' quality of life.</p>
-                                <p>I configure and maintain <strong>CI/CD pipelines</strong> that increase the
-                                    velocity of product delivery. I'm comfortable with multiple platforms, including
-                                    <strong>GitHub Actions</strong> and <strong>Gitlab CI</strong>.
-                                </p>
-                                <p>I value <strong>highly automated</strong> workflows that automate delivery to staging
-                                    and deployment environments.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- no vertical padding to reduce spacing between sections -->
-        <section class="section py-0" id="projects" aria-label="projects">
-            <div class="container">
-                <h1 class="title">My projects</h1>
-                <p class="subtitle">My favorite projects, and what I'm currently working on.</p>
-                <div class="columns">
-                    <div class="column">
-                        <h1 class="title is-4 mb-3">Favorite projects</h1>
-                        <div class="box project-box">
-                            <h2 class="subtitle has-text-weight-semibold mb-1"><a
-                                    href="https://kerrigan.dev/wxtj-converter">WXTJ/WTJU Playlist Converter</a></h2>
-                            <p>
-                                At the University of Virginia's student-run radio station <a
-                                    href="https://wxtj.fm/">WXTJ</a>, DJs often spend time organizing their show
-                                playlists on music streaming services like Spotify. I built this
-                                tool to automate the conversion of Spotify playlists to the station's <span
-                                    class="is-family-monospace">.csv</span> format.
-                                Since then, the application has also seen heavy use from hosts at <a
-                                    href="https://www.wtju.net/">WTJU</a>, WXTJ's sister station.
-                            </p>
-                            <p><a href="https://github.com/joek13/wxtj-converter">View the
-                                    source code</a></p>
-                            <p><strong>Technologies:</strong> React, Python, AWS Lambda, AWS API Gateway</p>
-                        </div>
-                        <div class="box project-box">
-                            <h2 class="subtitle has-text-weight-semibold mb-1"><a
-                                    href="https://bdwa.herokuapp.com/">Blind
-                                    Date with
-                                    an Album</a>
-                            </h2>
-                            <p>A crowdsourced music discovery platform that publishes mysterious, user-submitted album
-                                descriptions.
-                                Created as part of <a href="https://2020f.pennapps.com/">PennApps XXI</a>.
-                            </p>
-                            <p><a href="http://github.com/joek13/bdwa">View the source
-                                    code</a></p>
-                            <p><strong>Technologies:</strong> Python, Django, PostgreSQL, Heroku</p>
-                        </div>
-                        <div class="box project-box">
-                            <h2 class="subtitle has-text-weight-semibold mb-1"><a
-                                    href="https://github.com/joek13/py-music-bot">Discord Music Bot</a>
-                            </h2>
-                            <p>A simple, minimalistic Discord music bot that plays songs from YouTube and other sources.
-                            </p>
-                            <p><a href="https://github.com/joek13/py-music-bot">View the
-                                    source code</a></p>
-                            <p><strong>Technologies:</strong> Python, Discord.py, ffmpeg, youtube-dl</p>
-                        </div>
-                        <div class="box project-box">
-                            <h2 class="subtitle has-text-weight-semibold mb-1"><a
-                                    href="https://github.com/joek13/pystv">pystv:
-                                    Ranked-Choice Voting</a>
-                            </h2>
-                            <p>A simple Python implementation of the Single Transferable Vote ranked-choice vote
-                                counting
-                                system,
-                                used in
-                                Club Running's Fall 2020 elections.</p>
-                            <p><a href="https://github.com/joek13/pystv">View the source
-                                    code</a></p>
-                            <p><strong>Technologies:</strong> Python, Google Forms</p>
-                        </div>
-                        <div class="box project-box">
-                            <h2 class="subtitle has-text-weight-semibold mb-1"><a
-                                    href="https://joek13.github.io/fourier-toy/">Fourier Toy</a>
-                            </h2>
-                            <p>A toy application that draws shapes using their Fourier transform.</p>
-                            <p><a href="http://github.com/joek13/fourier-toy">View the
-                                    source
-                                    code</a></p>
-                            <p><strong>Technologies:</strong> JavaScript, Node.js, jsfft</p>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <h1 class="title is-4 mb-3">What I'm working on now</h1>
-                        <div class="box project-box">
-                            <h2 class="subtitle has-text-weight-semibold mb-1"><a
-                                    href="https://theCourseForum.com/">theCourseForum</a>
-                            </h2>
-                            <p>I'm a full-stack software engineer at theCourseForum, a University of Virginia course
-                                review
-                                aggregator and academic
-                                planner with 41,000 users.
-                            </p>
-                            <p><a href="http://github.com/theCourseForum/theCourseForum2">View
-                                    the source code</a></p>
-                            <p><strong>Technologies:</strong> Docker, Python, Django, PostgreSQL, Bootstrap, jQuery</p>
-                        </div>
-                        <div class="box project-box">
-                            <h2 class="subtitle has-text-weight-semibold mb-1"><a
-                                    href="http://virginia.clubrunning.org/">UVA Club Running</a>
-                            </h2>
-                            <p>I'm the webmaster of UVA Club Running, an athletic CIO with over 100 active members. I
-                                spend
-                                time streamlining deployment, engineering web applications, and keeping the site
-                                up-to-date.</p>
-                            <p><a href="http://github.com/joek13/club-running-site">View
-                                    the
-                                    source code</a></p>
-                            <p><strong>Technologies:</strong> Python, Flask, React, GitHub Actions</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <hr />
-    <footer>
-        {% include horoscope.html %}
-    </footer>
-</body>
-
-</html>
+        I have also worked two summer internships with <a href="https://www.leadtools.com/">LEAD Technologies</a>,
+        developing iPhone and Android applications that leverage LEADTOOLS image- and document-processing
+        capabilities.
+    </p>
+    <h2>Interests and involvements</h2>
+    <p>
+        Outside of software, I'm a cross-country runner with <a href="http://virginia.clubrunning.org/">UVA Club
+            Running</a> and a jazz bassist in UVA's music program.
+    </p>
+</section>
+<section id="contact">
+    <h2>Contact me</h2>
+    <p>Email: <a href="mailto:joek1301@gmail.com">joek1301@gmail.com</a> (personal email)</p>
+    <p>Email: <a href="mailto:jek4qv@virginia.edu">jek4qv@virginia.edu</a> (university email)</p>
+    <p>LinkedIn: <a
+            href="https://www.linkedin.com/in/joseph-e-kerrigan/">https://www.linkedin.com/in/joseph-e-kerrigan/</a>
+    </p>
+</section>
