@@ -23,6 +23,13 @@ A crowdsourced music discovery platform that publishes mysterious, user-submitte
 
 [Source code](https://github.com/joek13/bdwa)
 
+### [UVA BACS Skilltree](https://kerrigan.dev/skilltree)
+A [skill tree](https://en.wiktionary.org/wiki/skill_tree) representing courses and their prerequisites in the University of Virginia's Bachelor of Arts in Computer Science program.
+
+**Technologies**: d3.js, good old fashioned HTML/CSS, graph theoretic thinking
+
+[Source code](https://github.com/joek13/skilltree)
+
 ### [Discord Music Bot](https://github.com/joek13/py-music-bot)
 A chatbot for the application Discord. It plays songs from YouTube and other sources into voice channels so you can listen with your friends in realtime.
 
