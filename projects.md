@@ -21,7 +21,7 @@ A crowdsourced music discovery platform that publishes mysterious, user-submitte
 
 **Technologies**: Python, Django, PostgreSQL, Heroku
 
-[Source code](https://github.com/joek13/py-music-bot)
+[Source code](https://github.com/joek13/bdwa)
 
 ### [Discord Music Bot](https://github.com/joek13/py-music-bot)
 A chatbot for the application Discord. It plays songs from YouTube and other sources into voice channels so you can listen with your friends in realtime.
