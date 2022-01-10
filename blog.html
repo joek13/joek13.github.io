@@ -1,0 +1,18 @@
+---
+layout: default
+description: Joe Kerrigan's blog posts.
+title: Joe Kerrigan's blog
+---
+
+<h1>Blog</h1>
+<p class="subtitle">My writing on technology, and sometimes other things too.</p>
+
+<ul class="blog-list">
+    {% for post in site.posts %}
+    <li>
+        <h2><a href="{{post.url}}">{{post.title}}</a></h2>
+        <p>{{post.description}}</p>
+        <p>{{post.excerpt}}</p>
+    </li>
+    {% endfor %}
+</ul>
