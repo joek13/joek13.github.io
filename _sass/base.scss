@@ -2,12 +2,16 @@
 // see https://necolas.github.io/normalize.css/
 @import "normalize.scss";
 
+// import monokai syntax higlighting
+@import "monokai.scss";
+
 // use Inter font from Google fonts
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 // theme variables
 $theme-black: rgb(41, 47, 54);
 $theme-white: #ffffff;
+$theme-gray: #efefef;
 $theme-blue: #1982C4;
 
 $theme-bg: $theme-white;
@@ -146,3 +150,6 @@ ul.blog-list {
     }
 }
 
+pre {
+    padding: 20px;
+}
