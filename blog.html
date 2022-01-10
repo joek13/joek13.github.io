@@ -2,6 +2,7 @@
 layout: default
 description: Joe Kerrigan's blog posts.
 title: Joe Kerrigan's blog
+categories: technical
 ---
 
 <h1>Blog</h1>
@@ -13,6 +14,7 @@ title: Joe Kerrigan's blog
         <h2><a href="{{post.url}}">{{post.title}}</a></h2>
         <p>{{post.description}}</p>
         <p>{{post.excerpt}}</p>
+        <p class="date">{{post.date | date: "%-d %B %Y"}}</p>
     </li>
     {% endfor %}
 </ul>

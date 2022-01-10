@@ -91,6 +91,7 @@ nav {
             p {
                 font-size: 1.2rem;
                 margin-top: 0.5rem;
+                margin-bottom: 2rem;
             }
         }
     }
@@ -137,4 +138,11 @@ main {
 ul.blog-list {
     padding: 0;
     list-style: none;
+
+    li {
+        p.date {
+            font-style: italic;
+        }
+    }
 }
+
