@@ -21,6 +21,7 @@ $theme-accent: $theme-blue;
 body {
     background-color: $theme-bg;
     color: $theme-fg;
+    overflow-x: hidden; // prevent horizontal scrollbar
 
     // gutters to the side, even on mobile devices
     margin-left: 20px;
@@ -34,8 +35,6 @@ body {
         margin-left: auto;
         margin-right: auto;
     }
-
-    overflow: auto;
 }
 
 a {
@@ -152,4 +151,6 @@ ul.blog-list {
 
 pre {
     padding: 20px;
+
+    overflow-x: scroll;
 }
