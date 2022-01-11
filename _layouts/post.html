@@ -1,0 +1,29 @@
+---
+---
+<!-- default page layout with header and basic seo tags -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ page.description }}">
+    <meta name="author" content="Joe Kerrigan">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="{{ page.title }}">
+    <meta property="og:description" content="{{ page.description }}">
+    <link rel="stylesheet" href="/css/post.css" />
+</head>
+
+<body>
+    {% include header.html %}
+    <main>
+        <h1>{{ page.title }}</h1>
+        <p class="subtitle"> {{ page.description}} </p>
+        {{ content }}
+    </main>
+</body>
+
+</html>
