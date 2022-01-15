@@ -2,8 +2,12 @@
 layout: post
 title: Building a WORDLE Solver in Python
 description: Exploits of a coder in quarantine.
+excerpt_separator: <!--end-excerpt-->
 ---
+*(Updated 1/15/2022. [View this post's history on GitHub.](https://github.com/joek13/joek13.github.io/commits/main/_posts/2022-01-10-building-a-wordle-solver-in-python.md))*
+
 I spent the first days of a fresh new year like many others: in quarantine with COVID. Fortunately I had already received my vaccine and booster; my symptoms were mild. But I was still left with an abundance of downtime before classes began, and I became completely preoccupied with the *delightful* [WORDLE](https://www.powerlanguage.co.uk/wordle/).
+<!--end-excerpt-->
 
 For the uninitiated, WORDLE is an online word game similar to the guessing game [Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game)). In WORDLE, you get six attempts at guessing a secret five-letter word. After each guess, you get feedback on which letters you have guessed correctly and in the correct position (highlighted in green), which you have guessed correctly but are misplaced (yellow), and which do not appear at all in the puzzle's solution. You can use this feedback to hone in on the correct solution.
 
@@ -11,27 +15,46 @@ I love WORDLE. Its origin story is [downright adorable](https://www.nytimes.com/
 
 And so, for the inaugural post on my blog, I aim to contribute to the ongoing Cambrian explosion of WORDLE programming posts by building a WORDLE solver in Python.
 
-## High-level analysis
-Our strategy is to keep a list of candidate solutions—words which could possibly be the answer to a given puzzle. At each step, we pick some word (more on this later) to enter as a guess and observe the feedback. Based on the feedback, we narrow the space of viable candidate solutions.
+## Strategy overview
+Our strategy is adapted from computer scientist Donald Knuth's [strategy for solving Mastermind](https://stackoverflow.com/questions/62430071/donald-knuth-algorithm-mastermind). Our strategy is to maintain a list of candidate solutions—words which could possibly be the answer to a given puzzle. At each step, we make a guess, and based on the feedback, we narrow the space of viable candidate solutions.
 
-<!-- question: is the best guess always among the remaining possibilities?
-is there ever a time it makes more sense to guess a word that you know is invalid,
-perhaps in the larger guess list rather than the solution list? -->
+[WORDLE has two wordlists](https://blog.scubbo.org/posts/cheating-at-word-games/#fn:1). One is a list of the [valid guesses](https://github.com/joek13/wordle/blob/master/guesses.txt), which contains 10,657 words at present. The other is a list of 2,315 possible [puzzle solutions](https://github.com/joek13/wordle/blob/master/solutions.txt). Presumably these are separated so that no WORDLE requires knowledge of a rare or obscure word to solve. We'll load both lists and initialize a list of possible guesses and possible solutions.
 
-Initially, the set of candidate solutions is the [entire WORDLE wordlist](https://github.com/joek13/wordle/blob/master/words.txt)[^1]. 
+```python
+def load_words(wordlist_path: str) -> typing.List[str]:
+    """Loads wordlist from a newline-delimited file."""
+    with open(wordlist_path, "r") as f:
+        return [line.strip() for line in f.readlines()]
 
-Suppose we guess the word "SWORD" and see the following feedback.
+if __name__ == "__main__":
+    all_solutions = load_words("./solutions.txt")  # load possible solution words
+    all_guesses = solutions + load_words("./guesses.txt")  # load additional guess words
+    # each solution word is itself a valid guess word.
+```
+
+After we make a guess, we need to infer from the feedback which candidate solutions remain valid. Suppose we guess the word "SWORD" and see the following feedback.
 
 <img alt="guessing 'SWORD'; the letter 'R' is green, and all the others are gray" src="/img/wordle_1.png" width="500" />
 
-We cut any candidate solution that doesn't have R in the fourth position. We can also discard any candidate containing the letters S, W, O, or D, since they are gray.
+We can cut any candidate solution that doesn't have R in the fourth position. We can also discard any candidate containing the letters S, W, O, or D, since they are gray.
 
 <img alt="guessing 'SMITE'; 'E' is yellow, all others are gray" src="/img/wordle_2.png" width="500" />
 
 Yellow letters give us information, too. We can toss out any candidate words without Es. Also, the fact that E is yellow (rather than green) means the solution *doesn't* have an E in the fifth position, so we can discard any candidate words with E in the fifth position.
 
+Accounting for possible repetition requires a bit more thinking. In the following picture, the solution is PANIC:
+
+<img alt="guessing 'ALAMO'; the first A is yellow, all others are gray" src="/img/wordle_3.png" width="500" />
+
+The first A is yellow, but the second one is gray because PANIC only contains one A. If we had instead guessed HALAL:
+
+<img alt="guessing 'HALAL'; the first A is green, all others are gray" src="/img/wordle_4.png" width="500" />
+
+The second A is still gray. Each yellow/green letter in our guess "uses up" a corresponding letter in the solution; if we run out, further repetitions in our guess are gray, even though the letter happens to be in the solution. For non-repeated letters, gray means the letter is not in the word at all. As the example above shows, this is not necessarily the case for repeated letters.
+
+
 ### `word_consistent` predicate generator
-Let's express this as a function, `word_consistent`, which accepts feedback about a guess, and returns a predicate that checks whether a given word is consistent with the feedback.
+We express this logic as a function, `word_consistent`, which accepts feedback about a guess and returns a predicate that checks whether a given word is consistent with the feedback.
 
 First, we introduce a type alias to make our type hints a little more readable. `PositionLetterPair` is a tuple `(int, str)` representing a letter at a given position. (So `(0, "g")` represents a G in the first position.)
 ```python
@@ -43,30 +66,51 @@ PositionLetterPair = typing.Tuple[int, str]
 Now we define `word_consistent`, which accepts
 - `green_pairs`, a list of position-letter pairs representing the green letters
 - `yellow_pairs`, a list of position-letter pairs representing the yellow letters
-- `gray_letters`, a `Set` of letters representing the gray letters
-    -  The position of gray letters is irrelevant, so we don't bother with `PositionLetterPair`.
+- `gray_pairs`, a list of position-letter pairs representing the gray letters
 
-It returns a function, referred to internally as `pred`, which is a *predicate* on strings: it accepts `string` objects and returns a boolean value. The idea of a function that returns another function might seem a little bit strange, but we'll see later why this is quite an ergonomic way of solving this problem.
+It returns a function, referred to internally as `pred`, which is a *predicate* on strings: it accepts `string` objects and returns a boolean value. The idea of a function that returns another function might seem a little bit strange, but we'll see later why this is a surprisingly elegant way of doing things.
 
 ```python
 def word_consistent(green_pairs: typing.List[PositionLetterPair],
                     yellow_pairs: typing.List[PositionLetterPair],
-                    gray_letters: typing.Set[str]) -> typing.Callable[[str], bool]:
+                    gray_pairs: typing.List[PositionLetterPair]) -> typing.Callable[[str], bool]:
     """Returns a predicate testing whether a given word is consistent with observed feedback."""
-
     def pred(word):
-        # any viable solution must:
-        # - have letter l at position p for all green position-letter pairs (l, p)
-        green_matches = all(word[p] == l for (p, l) in green_pairs)
-        # - not have letter l at position p for any yellow position-letter pair (l, p)
-        yellow_mismatches = not any(word[p] == l for (p, l) in yellow_pairs)
-        # - contain letter l for all yellow position-letter pairs (l, p)
-        yellow_letters = set(letter for (_, letter) in yellow_pairs)
-        yellow_contains = all(l in word for l in yellow_letters)
-        # - contain no gray letters l
-        gray_absent = all(l not in word for l in gray_letters)
+        # count the letters in word
+        letter_counts = collections.Counter()
+        for letter in word:
+            letter_counts[letter] += 1
 
-        return green_matches and yellow_mismatches and yellow_contains and gray_absent
+        # any viable solution must:
+        # have letter l at position p for any green pair (p, l)
+        for (p, l) in green_pairs:
+            if word[p] != l:
+                # green pair does not match
+                return False
+            else:
+                # green letters "use up" one of the solution letters
+                letter_counts[l] -= 1
+
+        # not have letter l at position p for any yellow pair (p, l)
+        for (p, l) in yellow_pairs:
+            if word[p] == l:
+                # letter does match, but it shouldn't
+                return False
+            else:  # ...and contain letter l somewhere, aside from a green space
+                # doesn't contain this letter,
+                # or perhaps doesn't contain it enough times
+                if letter_counts[l] <= 0:
+                    return False
+                else:
+                    # yellow letters "use up" one of the solution letters
+                    letter_counts[l] -= 1
+
+        # contain no gray letters in excess (not "used up")
+        for (p, l) in gray_pairs:
+            if letter_counts[l] != 0:
+                return False
+
+        return True
 
     return pred
 ```
@@ -78,59 +122,78 @@ Intuitively, we want to always guess the word that cuts down the set of candidat
 
 Fortunately, decision rules like [minimax](https://en.wikipedia.org/wiki/Minimax) exist to make decisions in spite of this uncertainty. Minimax instructs us to guess a word that *minimizes* the *maximum* possible loss in any outcome. For any guess, it asks, "how many words would be left in the worst-case scenario?" and picks the word that minimizes this quantity.
 
+### Exploitation vs. exploration 
+Anyone who has played enough WORDLE has doubtless encountered the tradeoff between **exploitation and exploration.** At every step, you have information about which solutions are valid. You can choose to **exploit** this information, making guesses and attempting to win the puzzle completely. But you might instead choose to **explore:** make guesses that cannot possibly be the puzzle solution but instead yield more information.
+
+For instance: once you see a green letter, you know the solution contains that exact letter at that exact position. On your next guess, you might guess a different letter in that space to see if it is present in the word at all. You do this even though disregarding the green letter *guarantees* your next guess will not solve the puzzle; you have chosen to explore rather than exploit.
+
+This decision rule will always choose to explore. The list of possible guesses is populated with the union of the two wordlists and is never altered afterwards. What this means in practice is that the chosen guess might not even be a viable solution; it is just the word that will cut down the set of possible solutions the most (in the worst-case scenario.) 
+
 ### Generating feedback
 Before we implement our minimax decision rule, we have to generate the feedback from guessing a word under a given solution. That's what `generate_feedback` does; you give it a puzzle solution and your guess, and it returns:
 - the list of `PositionLetterPair`s representing to the green letters,
 - the list of `PositionLetterPair`s representing to the yellow letters,
-- and the set of gray letters.
+- and the list of `PositionLetterPair`s representing to the gray letters.
 
 ```python
-def generate_feedback(soln: str, guess: str) -> typing.Tuple[typing.List[PositionLetterPair], typing.List[PositionLetterPair], typing.Set[str]]:
+def generate_feedback(soln: str, guess: str) -> typing.Tuple[typing.List[PositionLetterPair],
+                                                             typing.List[PositionLetterPair],
+                                                             typing.List[PositionLetterPair]]:
     """Returns the feedback from guessing `guess` when the solution is `soln`.
     The feedback is returned as a tuple of (green (pos, letter) pairs, yellow (pos, letter) pairs, set of gray letters)
     """
     # sanity check
     assert len(soln) == len(guess)
 
+    # counts all the letters in the solution word
+    letter_counts = collections.Counter()
+    for letter in soln:
+        letter_counts[letter] += 1
+
     # selects all (position, letter) pairs where the letters in soln and guess are equal
     green_pairs = [(p1, soln_letter) for ((p1, soln_letter), guess_letter)
                    in zip(enumerate(soln), guess) if soln_letter == guess_letter]
 
-    green_letters = set(letter for (_, letter) in green_pairs)
+    # subtract the green letters from the letter counts,
+    # since green letters "use up" letters from the solution word.
+    for (_, letter) in green_pairs:
+        letter_counts[letter] -= 1
 
-    # selects all (position, letter) pairs where the letter l from guess is
-    # - in the soln word
-    # - but not in the set of green letters
+    yellow_pairs = []
+    for pos, letter in enumerate(guess):
+        # there are excess letters that aren't already marked green
+        if letter_counts[letter] > 0:
+            # append this pair
+            yellow_pairs.append((pos, letter))
+            # subtract one from excess letter count; yellow letters "use up" solution word letters.
+            letter_counts[letter] -= 1
 
-    yellow_pairs = [(p, guess_letter) for (p, guess_letter) in enumerate(
-        guess) if guess_letter in soln and guess_letter not in green_letters]
+    # all remaining pairs are gray
+    gray_pairs = [pair for pair in enumerate(guess) if pair not in green_pairs and pair not in yellow_pairs]
 
-    # all letters that are in the guess but not in the solution
-    gray_letters = set(guess) - set(soln)
-
-    return green_pairs, yellow_pairs, gray_letters
+    return green_pairs, yellow_pairs, gray_pairs
 ```
 
-We can use this method to determine how many candidate words we get to slash for each possible guess under each possible solution. We also get some ergonomic payoff:
-- We get to use the [unpacking operator](https://docs.python.org/3/tutorial/controlflow.html#unpacking-argument-lists) `*` to pass the result of `generate_feedback` directly as arguments to `word_consistent`.
-- We get to use the predicate returned by `word_consistent` in a [`filter`](https://docs.python.org/3/library/functions.html#filter) over candidate words.
+We can use this method to determine how many candidate words we get to slash for each possible guess under each possible solution. We also get to use some snazzy Python features for the promised ergonomic payoff:
+- **Unpacking operator:** We get to use the [unpacking operator](https://docs.python.org/3/tutorial/controlflow.html#unpacking-argument-lists) `*` to pass the result of `generate_feedback` directly as arguments to `word_consistent`.
+- **First-class functions:** We get to use the predicate returned by `word_consistent` in a [`filter`](https://docs.python.org/3/library/functions.html#filter) over candidate words.
 
 ```python
-def select_guess(candidates: str) -> typing.Tuple[str, int]:
-    """Selects guess among candidates based on minimax decision rule.
+def select_guess(guesses: typing.List[str],
+                 candidates: typing.List[str]) -> typing.Tuple[str, int]:
+    """Selects a guess based on minimax decision rule.
+
     Returns tuple of (word, max), where word is the guess, and max is
     the maximum possible of remaining candidates after guessing `word`.
     """
     current_minimax = None
     current_minimax_word = None
 
-    print(f"Selecting best guess from {len(candidates)} possibilities...")
+    print(f"Selecting best guess from {len(guesses)} possibilities...")
 
-    # for each possible guess...
-    for guess in candidates:
+    for guess in guesses:
         # max loss for this guess
         maximum_remaining = None
-        # for each possible solution...
         for possible_soln in candidates:
             # feedback guessing `guess` when the solution is `soln`
             feedback = generate_feedback(possible_soln, guess)
@@ -158,27 +221,20 @@ The worst-case runtime complexity of selecting a guess is cubic in the size of t
     - once for each possible solution,
         - and once to filter each candidate. (This is obscured by the `filter`.)
 
-Fortunately, we rarely encounter the worst-case, and because we are searching for a "minimum of maximums", we can `break` the inner loop if the running maximum ever goes above the running minimax. Even with this optimization, selecting the first guess takes around ~1 minute, 10 seconds on my laptop.
+Fortunately, we rarely encounter the worst-case: because we are searching for a "minimum of maximums", we can `break` the inner loop if the running maximum ever goes above the running minimax. Even with this optimization, selecting the first guess takes around ~3 minutes on my laptop.
 
-At this point, the algorithm suffices to tell us the best starting word, according to our decision rule. We write some quick code to load the words from a text file:
-```python
-def load_words(wordlist_path: str = "./words.txt") -> typing.List[str]:
-    """Loads wordlist from a newline-delimited file."""
-    with open(wordlist_path, "r") as f:
-        return [line.strip() for line in f.readlines()]
-```
-We then select a guess from these words:
+At this point, the algorithm suffices to tell us the best starting word according to our decision rule.
 ```python
 if __name__ == "__main__":
-    all_words = load_words()
-
-    possibilities = all_words
-    guess, worst_case = select_guess(possibilities)
+    all_solutions = load_words("./solutions.txt")  # load possible solution words
+    all_guesses = all_solutions + load_words("./guesses.txt")  # load additional guess words
+    # each solution word is itself a valid guess word.
+    guess, worst_case = select_guess(all_guesses, all_solutions)
     print(f"I suggest: {guess.upper()}, which leaves {worst_case} words at worst")
 ```
 Which outputs:
 ```markdown
-Selecting best guess from 2315 possibilities...
+Selecting best guess from 12972 possibilities...
 I suggest: ARISE, which leaves 168 words at worst
 ```
 This is exactly in line with the suggested starting words at [wordlesolver.com](https://www.wordlesolver.com/). (WordleSolver suggests multiple words—all of which are anagrams of ARISE.) It differs from the suggested SOARE on [Matt Rickard's blog](https://matt-rickard.com/wordle-whats-the-best-starting-word/), but Matt's article filters by average performance over all possible solutions, rather than worst-case performance, like ours does.
@@ -189,17 +245,24 @@ The last thing we have to do to convert this into a fully-fledged solver is to s
 2. prompts the user for feedback from their WORDLE game,
 3. and narrows down the candidates based on their selection.
 
-This implementation's input method is a little bit clunky; it asks users to enter green, yellow, and gray tiles one line at a time, entering `_` for blanks.
+This implementation's input method is a little bit clunky; it asks users to enter green, yellow, and gray tiles one line at a time, entering `_` for blanks. It also hard-codes the first guess, since the solver always suggests ARISE.
 
 One interesting advantage of this approach is that you don't *have* to enter the guesses suggested by the solver. If you are halfway through an existing game and you want the solver to try its best to save you, you can just enter the results of your previous guesses and let it take over.
 
 ```python
 if __name__ == "__main__":
-    all_words = load_words()  # load words from file
+    all_solutions = load_words("./solutions.txt")  # load possible solution words
+    all_guesses = all_solutions + load_words("./guesses.txt")  # load additional guess words
 
-    possibilities = all_words
-    while True:
-        guess, worst_case = select_guess(possibilities)
+    # initialize space of candidates to all puzzle solutions
+    candidates = all_solutions
+    for i in range(6):
+        if i > 0:
+            guess, worst_case = select_guess(all_guesses, candidates)
+        else:
+            # hard-code first guess to save on processing time
+            guess, worst_case = "arise", 168 
+
         print(f"I suggest: {guess.upper()}, which leaves {worst_case} words at worst")
 
         input_green = input("Enter the green letters, using _ for blanks:   ")
@@ -217,31 +280,39 @@ if __name__ == "__main__":
         ]
 
         input_gray = input("Enter the gray letters, using _ for blanks:    ")
-        gray_letters = set(letter.lower() for letter in input_gray if letter.isalpha())
+        assert len(input_gray) == 5
+        gray_pairs = [
+            (position, letter.lower()) for (position, letter) in enumerate(input_gray) if letter.isalpha()
+        ]
 
-        pred = word_consistent(green_pairs, yellow_pairs, gray_letters)
-        possibilities = list(filter(pred, possibilities))
+        pred = word_consistent(green_pairs, yellow_pairs, gray_pairs)
+        candidates = list(filter(pred, candidates))
 
-        if len(possibilities) == 1:
-            print("The word is:", possibilities[0].upper())
+        if len(candidates) == 1:
+            print("The word is:", candidates[0].upper())
             break
-        elif len(possibilities) < 1:
+        elif len(candidates) < 1:
             print("The puzzle is impossible! Perhaps you entered results incorrectly?")
+            break
 ```
 ## Demonstration
 Let's use our new solver to crack today's WORDLE:
 ```
-Selecting best guess from 2315 possibilities...
 I suggest: ARISE, which leaves 168 words at worst
 Enter the green letters, using _ for blanks:   _____
-Enter the yellow letters, using _ for blanks:  _r__e
-Enter the gray letters, using _ for blanks:    a_is_
-Selecting best guess from 100 possibilities...
-I suggest: OUTER, which leaves 19 words at worst
-Enter the green letters, using _ for blanks:   _u___
-Enter the yellow letters, using _ for blanks:  ___er
-Enter the gray letters, using _ for blanks:    o_t__
-The word is: QUERY
+Enter the yellow letters, using _ for blanks:  a_i__
+Enter the gray letters, using _ for blanks:    _r_se
+Selecting best guess from 12972 possibilities...
+I suggest: CANAL, which leaves 4 words at worst
+Enter the green letters, using _ for blanks:   _an__
+Enter the yellow letters, using _ for blanks:  c____
+Enter the gray letters, using _ for blanks:    ___al
+Selecting best guess from 12972 possibilities...
+I suggest: HUMPH, which leaves 1 words at worst
+Enter the green letters, using _ for blanks:   _____
+Enter the yellow letters, using _ for blanks:  ___p_
+Enter the gray letters, using _ for blanks:    hum_h
+The word is: PANIC
 ```
 <img alt="today's WORDLE solved in a cool 3 guesses" src="/img/wordle_solved.png" width="500" />
 
@@ -255,5 +326,3 @@ Each of the following articles was helpful in writing this post:
 - [Jack Jackson's *Cheating at Word Games*](https://blog.scubbo.org/posts/cheating-at-word-games/)
 - [Christian Genco's Twitter thread](https://twitter.com/cgenco/status/1479144204043444226)
 - [Matt Rickard: "Wordle: What's the Best Starting Word?"](https://matt-rickard.com/wordle-whats-the-best-starting-word/)
-
-[^1]: As it turns out, [WORDLE has two wordlists](https://blog.scubbo.org/posts/cheating-at-word-games/#fn:1). One is a list of valid guesses, which is large. The other is a list of possible puzzle solutions. Presumably these are separated so that no WORDLE requires knowledge of some rare or obscure word to solve. Altogether, there are 2,315 possible solutions.
