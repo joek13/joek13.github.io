@@ -4,7 +4,7 @@ title: Building a WORDLE Solver in Python
 description: Exploits of a coder in quarantine.
 excerpt_separator: <!--end-excerpt-->
 ---
-*(Updated 1/15/2022. [View this post's history on GitHub.](https://github.com/joek13/joek13.github.io/commits/main/_posts/2022-01-10-building-a-wordle-solver-in-python.md))*
+*(Updated 1/17/2022. [View this post's history on GitHub.](https://github.com/joek13/joek13.github.io/commits/main/_posts/2022-01-10-building-a-wordle-solver-in-python.md))*
 
 I spent the first days of a fresh new year like many others: in quarantine with COVID. Fortunately I had already received my vaccine and booster; my symptoms were mild. But I was still left with an abundance of downtime before classes began, and I became completely preoccupied with the *delightful* [WORDLE](https://www.powerlanguage.co.uk/wordle/).
 <!--end-excerpt-->
@@ -162,7 +162,7 @@ def generate_feedback(soln: str, guess: str) -> typing.Tuple[typing.List[Positio
     yellow_pairs = []
     for pos, letter in enumerate(guess):
         # there are excess letters that aren't already marked green
-        if letter_counts[letter] > 0:
+        if letter_counts[letter] > 0 and (pos, letter) not in green_pairs:
             # append this pair
             yellow_pairs.append((pos, letter))
             # subtract one from excess letter count; yellow letters "use up" solution word letters.
