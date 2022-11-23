@@ -18,9 +18,11 @@
 </head>
 
 <body>
+    {% unless page.breadcrumbs == false %}
     <nav>
         {% include breadcrumbs.html %}
     </nav>
+    {% endunless %}
     <main>
         {{ content }}
     </main>
