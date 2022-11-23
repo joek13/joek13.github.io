@@ -8,6 +8,10 @@ html {
     background-color: $color-bg;
 }
 
+nav {
+    margin: 10px 0;
+}
+
 body {
     font-family: Garamond, 'Times New Roman', serif;
     color: $color-fg;
@@ -41,4 +45,15 @@ a:visited {
 .subtitle {
     margin: 0;
     font-size: 1.2em;
+}
+
+// styles for /blog
+
+ul.blog-list {
+    list-style: none;
+    padding: 0;
+}
+
+li.post-item > p {
+    margin: 0;
 }

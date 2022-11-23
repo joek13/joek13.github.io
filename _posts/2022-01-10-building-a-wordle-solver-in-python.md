@@ -2,6 +2,7 @@
 layout: post
 title: Building a WORDLE Solver in Python
 description: Exploits of a coder in quarantine.
+permalink: /blog/wordle-solver
 excerpt_separator: <!--end-excerpt-->
 ---
 *(Updated 1/17/2022. [View this post's history on GitHub.](https://github.com/joek13/joek13.github.io/commits/main/_posts/2022-01-10-building-a-wordle-solver-in-python.md))*
