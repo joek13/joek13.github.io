@@ -10,10 +10,8 @@ img {
     max-width: 80%;
 }
 
-ul, ol {
-    margin: 0;
-}
-
-div.footnotes {
-    margin-top: 2rem;
+pre.highlight > code {
+    display: block;
+    padding: 10px;
+    overflow-x: scroll;
 }

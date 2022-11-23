@@ -1,171 +1,29 @@
-// import CSS Reset
-// see https://necolas.github.io/normalize.css/
-@import "normalize.scss";
-
-// import monokai syntax higlighting
 @import "monokai.scss";
 
-// use Inter font from Google fonts
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
-// theme variables
-$theme-black: rgb(21, 24, 27);
-$theme-darkgray: rgb(41, 47, 54);
-$theme-white: #ffffff;
-$theme-gray: #efefef;
-$theme-purple: #8c46fa;
-
-$theme-bg-light: $theme-white;
-$theme-fg-light: $theme-darkgray;
-$theme-bg-dark: $theme-black;
-$theme-fg-dark: $theme-white;
-$theme-accent: $theme-purple;
-
-
 body {
-    background-color: $theme-bg-light;
-    color: $theme-fg-light;
-
-    @media (prefers-color-scheme: dark) {
-        background-color: $theme-bg-dark;
-        color: $theme-fg-dark;
-    }
-
-    overflow-x: hidden; // prevent horizontal scrollbar
-
-    // gutters to the side, even on mobile devices
-    margin-left: 20px;
-    margin-right: 20px;
-
-    font-family: Inter, sans-serif;
-
-    @media only screen and (min-width: 768px) {
-        // horizontally center page content on larger devices
-        max-width: 75%; 
-        margin-left: auto;
-        margin-right: auto;
-    }
+    font-family: Garamond, 'Times New Roman', serif;
+    color: #333;
+    margin: 40px auto;
+    padding: 0 20px;
+    max-width: 800px;
+    line-height: 1.3;
+    font-size: 18px;
 }
 
-a {
-    // use accent color for links
-    color: $theme-accent;
-    // no underline
-    text-decoration: none;
-
-    &:hover {
-        // ... except on hover
-        text-decoration: underline;
-    }
+h1,h2,h3 {
+    line-height: 1.2;
+    margin: 10px 0;
 }
 
-// site header: name and navigation
-header {
-    margin-bottom: 2rem;
+// homepage-specific styles
 
-    // joe kerrigan header
-    h1 {
-        margin-top: 1.5rem;
-        margin-bottom: 0.25rem;
-    }
-
-    // pronouns immediately below name
-    .pronouns {
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-
-    text-align: center;
-
-    // spacer before page content
-    hr {
-        max-width: 20rem;
-        border: 0;
-        border-top: 2px solid $theme-fg-light;
-        @media (prefers-color-scheme: dark) {
-            border-top: 2px solid $theme-fg-dark;
-        }
-    }
+.subtitle {
+    margin: 0;
+    font-size: 1.2em;
 }
 
-// navigation bar
-nav {
-    ul {
-        // remove padding so it centers correctly
-        padding: 0;
-        margin: 0;
-        // remove bullets
-        list-style: none;
-
-        li {
-            // display elements inline
-            display: inline-block;
-
-            margin-left: 0.2rem;
-            margin-right: 0.2rem;
-
-            p {
-                font-size: 1.2rem;
-                margin-top: 0.5rem;
-                margin-bottom: 2rem;
-            }
-        }
-    }
-}
-
-main {
-    // give headers a small bottom margin
-    h1, h2, h3, h4, h5, h6 {
-        margin-bottom: 0.25rem;
-    }
-
-    // custom style for the profile picture on the homepage
-    .profile {
-        border-radius: 5px;
-        float: right;
-        margin-left: 60px;
-        margin-bottom: 20px;
-
-        @media only screen and (max-width: 768px) {
-            float: none;
-            display:block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    }
-
-    // utility class for subtitles, directly below article title
-    .subtitle {
-        margin-top: 0;
-        margin-bottom: 0.25rem;
-        font-size: 1.2rem;
-        font-weight: 500;
-    }
-
-    p {
-        margin-top: 0.6rem;
-        margin-bottom: 0.6rem;
-        font-size: 1rem;
-        line-height: 1.5;
-    }
-
-    // some bottom padding below the main element
-    padding-bottom: 50px;
-}
-
-ul.blog-list {
-    padding: 0;
-    list-style: none;
-
-    li {
-        p.date {
-            font-style: italic;
-        }
-    }
-}
-
-pre {
-    padding: 20px;
-
-    overflow-x: scroll;
+#headshot {
+    display: block;
+    float: right;
+    margin: 20px 0 20px 20px;
 }
