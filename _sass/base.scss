@@ -40,11 +40,30 @@ a:visited {
     color: $color-accent;
 }
 
-// homepage-specific styles
-
 .subtitle {
     margin: 0;
     font-size: 1.2em;
+}
+
+header {
+    text-align: center;
+}
+
+header > h1, header > nav, header > nav > p {
+    margin: 0 0;
+}
+
+// styles for /index.html
+#profile {
+    margin-left: 20px;
+    margin-bottom: 20px;
+    float: right;
+
+    @media screen and (max-width: 650px) {
+        display: block;
+        margin: 10px auto;
+        float: none;
+    }
 }
 
 // styles for /blog
