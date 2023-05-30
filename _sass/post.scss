@@ -16,8 +16,14 @@ figcaption {
 }
 
 pre.highlight > code {
+    background-color: white;
+    border: 1px solid $color-fg;
     font-size: 0.8em;
     display: block;
     padding: 10px;
     overflow-x: scroll;
+}
+
+code {
+    font-size: 0.85em;
 }
