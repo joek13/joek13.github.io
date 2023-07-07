@@ -71,16 +71,23 @@ footer table td hr {
     border: 1px solid $color-fg;
 }
 
-// styles for /index.html
-#profile {
-    margin-left: 20px;
-    margin-bottom: 20px;
-    float: right;
+.profile {
+    &.left {
+        float: left;
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
+
+    &.right {
+        float: right;
+        margin-left: 20px;
+        margin-bottom: 20px;
+    }
 
     @media screen and (max-width: 650px) {
         display: block;
-        margin: 10px auto;
-        float: none;
+        margin: 10px auto !important;
+        float: none !important;
     }
 }
 
