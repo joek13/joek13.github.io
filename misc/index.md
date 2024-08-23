@@ -23,9 +23,7 @@ These notes reflect the classes as I took them and might be incomplete.
 
 ## Fun
 
-- [Bookshelf](/misc/bookshelf) &ndash; what I'm reading right now
 - [Moodboard](/mood) (warning: lots of big images)
-- Weird writing on [Oxbow](https://0xb0.cc)
 - The infamous [beverage alignment chart](/bev.png)
 - [Fourier toy](https://www.kerrigan.dev/fourier-toy/) &ndash; draw parametric functions using swinging lines
 - Partial solutions to the [Advent of Code](https://adventofcode.com/): [2021 (Haskell+Python)](https://github.com/joek13/advent-of-code-2021/), [2022 (Haskell)](https://github.com/joek13/advent-of-code-2022/)
