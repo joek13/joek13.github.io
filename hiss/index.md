@@ -53,6 +53,9 @@ The Hiss compiler `hissc` is written in Haskell and [open-sourced on GitHub](htt
      - A type-checking pass
 - A naive, untested tree-walking interpreter and an associated [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)
 
+In-progress features:
+- [hissvm](https://github.com/joek13/hissvm), a bytecode virtual machine written in Zig.
+
 Planned features include:
-- Machine code generation via a LLVM backend
+- Code generation 
 - An online Hiss playground
