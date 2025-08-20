@@ -1,0 +1,117 @@
+---
+title: Hiss playground
+---
+<!-- default page layout with header and basic seo tags -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ page.description }}">
+    <meta name="author" content="Joe Kerrigan">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="{{ page.title }}">
+    <meta property="og:description" content="{{ page.description }}">
+    <meta property="og:image" content="{{ page.image }}">
+    <link rel="stylesheet" href="/css/playground.css" />
+    <link rel="canonical" href="https://www.kerrigan.dev{{ page.url | replace:'index.html','' }}" />
+</head>
+
+<body><main>
+     <h1>
+          Hiss playground 🐍
+     </h1>
+     <p>
+          Write <a href="/hiss">Hiss</a> programs, execute them, and see their generated assembly.
+     </p>
+     <div id="playground">
+          <div id="editorPanel">
+               <h3>Editor</h3>
+<textarea id="editor">
+// Computes k mod n
+mod(n, k) = if k < n
+            then k
+            else mod(n, k-n)
+
+// Computes the Collatz stopping time of n
+collatz(n, steps) = if n == 1
+                    then steps
+                    else if mod(2, n) == 0
+                         then collatz(n/2, steps + 1)
+                         else collatz(3*n + 1, steps + 1)
+
+main() = collatz(27, 0) // Should output 111</textarea>
+          </div>
+          <div id="output">
+               <div id="assemblyPanel">
+                    <h3>Bytecode
+                    <button id="compile" onclick="doCompile()">Compile!</button>
+                    </h3>
+                    <code id="assembly">
+                         Hiss programs are converted to bytecode before they are executed.
+                         After you compile a program, you'll see its bytecode here.
+                    </code>
+               </div>
+               <div id="stdoutPanel">
+                    <h3>Output</h3>
+                    <code id="stdout">Click "compile" to get started.</code>
+               </div>
+          </div>
+     </div>
+     <h2>Known issues</h2>
+     <p>Hiss is a work in progress. It has a few known issues. And probably many more unknown issues.</p>
+     <ul>
+          <li>No support for closures or partial function application.</li>
+          <li>Let-in expressions break if you shadow an existing variable or use them outside of the function preamble.</li>
+     </ul>
+</main></body>
+
+<script>
+// We're writing JavaScript like it's 2000, baby!
+
+// More details: https://github.com/joek13/hiss/tree/main/playground
+const backendUrl = "https://spofblkugeqc3lvivohm7hzjdy0qizsf.lambda-url.us-west-2.on.aws/";
+
+function setError(message) {
+     console.log("Error:", message);
+     setStdout("Request to playground backend failed: " + message);
+}
+
+function setAssembly(assembly) {
+     document.getElementById("assembly").innerText = assembly;
+}
+
+function setStdout(stdout) {
+     document.getElementById("stdout").innerText = stdout;
+}
+
+function setLoading(loading) {
+     document.getElementById("compile").disabled = loading;
+}
+
+async function doCompile() {
+     console.log("Compiling...");
+     const source = document.getElementById("editor").value;
+     const request = JSON.stringify({ source });
+     console.log("Backend request:", request);
+     try {
+          setAssembly("");
+          setStdout("Ssssssss... Currently compiling...");
+          setLoading(true);
+          const response = await fetch(backendUrl, { method: "POST", body: request });
+          const body = await response.json();
+          console.log("Response body:", body);
+          setAssembly(body["assembly"]);
+          setStdout(body["stdout"]);
+          setLoading(false);
+     } catch(err) {
+          setError(err);
+          setLoading(false);
+     }
+}
+</script>
+
+</html>

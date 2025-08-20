@@ -1,0 +1,87 @@
+@import "base.scss";
+
+html {
+    height: 75%;
+}
+
+body {
+    max-width: none;
+    margin-left: 100px;
+    margin-right: 100px;
+    height: 100%;
+}
+
+main {
+    height: 100%;
+}
+
+#playground {
+    height: 100%;
+    display: flex;
+    gap: 20px;
+}
+
+#editorPanel {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    > textarea {
+        resize: none;
+        flex-grow: 1;
+        padding: 10px;
+
+        background-color: white;
+        font-size: 0.8em;
+        border: 1px solid $color-fg;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+#output {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    > div {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+}
+
+#assemblyPanel {
+    flex: 2;
+}
+
+#stdoutPanel {
+    flex: 1;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: $color-accent;
+    font-weight: bold;
+    color: white;
+    font-size: 0.9em;
+
+    &#compile {
+        float: right;
+    }
+}
+
+code {
+    flex-grow: 1;
+    background-color: white;
+    border: 1px solid $color-fg;
+    font-size: 0.8em;
+    display: block;
+    padding: 10px;
+    overflow-y: scroll;
+}

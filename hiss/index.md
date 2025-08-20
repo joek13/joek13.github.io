@@ -7,13 +7,14 @@ image: /img/hiss.png
 
 <img class="profile right" alt="Poorly-drawn Hiss logo" src="/img/hiss.png" width="150">
 
-<a href="/hiss">Hiss</a> is my WIP hobby programming language implemented in Haskell.
+[Hiss](/hiss) is my WIP hobby programming language implemented in Haskell and Zig.
 It is named in honor of a copperhead snake discovered in the basement of my parents' house, which was then serving as my bedroom.
 
-I'm building Hiss to learn more about Haskell, functional programming in general, and in particular, the implementation of functional languages.
+I'm building Hiss to learn more about compilers, interpreters, and functional programming.
 (So here's your disclaimer: it's neither well-tested nor stable and will almost certainly never be recommended for production use.)
 
-Here is a sample Hiss program that computes the [Collatz stopping time](https://en.wikipedia.org/wiki/Collatz_conjecture) of 27:
+Here's a sample Hiss program that computes the [Collatz stopping time](https://en.wikipedia.org/wiki/Collatz_conjecture) of 27:
+
 ```js
 // computes k mod n
 mod(n, k) = if k < n
@@ -32,6 +33,8 @@ collatz(n, steps) = if n == 1
 main() = collatz(27, 0) // should output 111
 ```
 
+Try running this program on the [playground](/hiss/playground)!
+
 Hiss is:
 - [Purely functional](https://en.wikipedia.org/wiki/Purely_functional_programming)
 - [Strictly evaluated](https://en.wikipedia.org/wiki/Evaluation_strategy)
@@ -44,18 +47,22 @@ It supports some cool features from functional programming:
 - [First-class functions](https://en.wikipedia.org/wiki/First-class_function)
 - [Type inference](https://en.wikipedia.org/wiki/Type_inference)
 
-The Hiss compiler `hissc` is written in Haskell and [open-sourced on GitHub](https://github.com/joek13/hiss).
-`hissc` is still in progress, but it already includes:
+Hiss is [open-sourced on GitHub](https://github.com/joek13/hiss). It has two main components:
+- `hissc` – Hiss bytecode compiler, written in Haskell
+- `hissvm` - Hiss bytecode interpreter, written in Zig
+
+`hissc` and `hissvm` are still in progress, but they already include:
 - Hiss lexer and parser
-- Semantic passes, including:
-     - A name-checking pass that rejects use of undeclared identifiers
-     - A dependency-checking pass that rejects value cycles (e.g., code like `a = b, b = c, c = a`)
-     - A type-checking pass
-- A naive, untested tree-walking interpreter and an associated [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)
+- Semantic passes
+     - A name-checking pass that rejects undeclared identifiers
+     - A dependency-checking pass that rejects value cycles (code like `a = b, b = c, c = a`)
+     - A type inference and type-checking pass
+- (Incomplete) code generation
+- Bytecode interpreter
+- An [online playground](/hiss/playground) where you can try Hiss yourself!
 
-In-progress features:
-- [hissvm](https://github.com/joek13/hissvm), a bytecode virtual machine written in Zig.
-
-Planned features include:
-- Code generation 
-- An online Hiss playground
+Planned work includes
+- Completion of code generation
+- Optimization passes
+- User-defined types and pattern matching
+- Side effects for I/O? Who knows!
