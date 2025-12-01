@@ -1,17 +1,22 @@
 ---
 layout: post
 title: Hiss
-description: My WIP hobby programming language implemented in Haskell.
+description: Toy programming language and bytecode compiler.
 image: /img/hiss.png
 ---
 
 <img class="profile right" alt="Poorly-drawn Hiss logo" src="/img/hiss.png" width="150">
 
-[Hiss](/hiss) is my WIP hobby programming language implemented in Haskell and Zig.
-It is named in honor of a copperhead snake discovered in the basement of my parents' house, which was then serving as my bedroom.
+Hiss is my WIP hobby programming language.
+It features a bytecode compiler written in Haskell and a virtual machine written in Zig.
+Hiss is named in honor of a copperhead snake discovered in the basement of my parents' house, which was then serving as my bedroom.
 
 I'm building Hiss to learn more about compilers, interpreters, and functional programming.
 (So here's your disclaimer: it's neither well-tested nor stable and will almost certainly never be recommended for production use.)
+
+Try Hiss for yourself on the [playground](/hiss/playground). Check out its [source code on GitHub](https://github.com/joek13/hiss).
+
+## Example
 
 Here's a sample Hiss program that computes the [Collatz stopping time](https://en.wikipedia.org/wiki/Collatz_conjecture) of 27:
 
@@ -34,6 +39,8 @@ main() = collatz(27, 0) // should output 111
 ```
 
 Try running this program on the [playground](/hiss/playground)!
+
+## More details
 
 Hiss is:
 - [Purely functional](https://en.wikipedia.org/wiki/Purely_functional_programming)
